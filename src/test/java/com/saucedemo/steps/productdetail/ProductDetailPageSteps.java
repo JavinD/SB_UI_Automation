@@ -18,6 +18,12 @@ public class ProductDetailPageSteps {
 
     @Given("I am on the product detail page")
     public void iAmOnTheProductDetailPage() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
         productDetailPage = new ProductDetailPage();
         boolean isDisplayed = productDetailPage.isProductDetailPageDisplayed();
         Assert.assertTrue("Product detail page is not displayed", isDisplayed);

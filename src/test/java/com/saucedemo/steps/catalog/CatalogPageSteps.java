@@ -1,10 +1,11 @@
-package com.saucedemo.steps.catalogpage;
+package com.saucedemo.steps.catalog;
 
-import com.saucedemo.pages.catalogpage.CatalogPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+
+import com.saucedemo.pages.catalog.CatalogPage;
 
 /**
  * Step definitions for Catalog Page functionality
@@ -101,6 +102,12 @@ public class CatalogPageSteps {
         
         catalogPage.clickOnFirstProduct();
         System.out.println("Clicked on first product");
+        
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @When("I click on product at index {int}")
@@ -111,6 +118,12 @@ public class CatalogPageSteps {
         
         catalogPage.clickOnProductImage(index);
         System.out.println("Clicked on product at index: " + index);
+        
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     @When("I click on the sort button")

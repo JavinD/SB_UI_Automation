@@ -35,12 +35,15 @@ public class ProductDetailPage extends HeaderComponent {
     @AndroidFindBy(id = "com.saucelabs.mydemoapp.android:id/priceTV")
     private WebElement productPrice;
 
-    /**
-     * Check if product detail page is displayed
-     * @return true if page is displayed
-     */
     public boolean isProductDetailPageDisplayed() {
-        return isHeaderDisplayed() && isElementDisplayed(addToCartButton);
+        try {
+            waitForSeconds(2);
+            boolean hasAddToCartButton = isElementDisplayed(addToCartButton);
+            boolean hasQuantityDisplay = isElementDisplayed(quantityDisplay);
+            return hasAddToCartButton && hasQuantityDisplay;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     /**

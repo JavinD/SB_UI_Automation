@@ -1,6 +1,6 @@
 package com.saucedemo.steps.general;
 
-import com.saucedemo.pages.catalogpage.CatalogPage;
+import com.saucedemo.pages.catalog.CatalogPage;
 import com.saucedemo.pages.general.HeaderComponent;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

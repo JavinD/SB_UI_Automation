@@ -1,10 +1,11 @@
-package com.saucedemo.steps.catalogpage;
+package com.saucedemo.steps.catalog;
 
-import com.saucedemo.pages.catalogpage.CatalogPage;
-import com.saucedemo.pages.catalogpage.SortModal;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
+
+import com.saucedemo.pages.catalog.CatalogPage;
+import com.saucedemo.pages.catalog.SortModal;
 
 import java.util.ArrayList;
 import java.util.Collections;

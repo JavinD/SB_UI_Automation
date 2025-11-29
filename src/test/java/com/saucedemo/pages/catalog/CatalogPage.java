@@ -1,4 +1,4 @@
-package com.saucedemo.pages.catalogpage;
+package com.saucedemo.pages.catalog;
 
 import com.saucedemo.pages.general.HeaderComponent;
 import io.appium.java_client.pagefactory.AndroidFindBy;
