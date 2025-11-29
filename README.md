@@ -3,12 +3,23 @@
 Mobile UI automation framework for testing the Sauce Labs Demo App on Android using Appium, Cucumber, and Java.
 
 ## 📋 Table of Contents
+- [Demo Video](#demo-video)
 - [Prerequisites](#prerequisites)
 - [Project Setup](#project-setup)
 - [Running Tests](#running-tests)
 - [Project Structure](#project-structure)
 - [Configuration](#configuration)
 - [Test Tags](#test-tags)
+
+---
+
+## 📺 Demo Video
+
+Watch the test automation framework in action:
+
+🎬 **[View Test Execution Demo](https://drive.google.com/file/d/1GNXdx6SdeN415ukVGEKR8ACWuc99qSEe/view?usp=drive_link)**
+
+*Demo shows the complete test execution including product browsing, cart management, and checkout flow.*
 
 ---
 
