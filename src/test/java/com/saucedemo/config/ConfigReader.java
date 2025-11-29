@@ -60,7 +60,6 @@ public class ConfigReader {
         return Integer.parseInt(properties.getProperty("explicitWait", "20"));
     }
 
-    // Test Data
     public static String getValidUsername() {
         return properties.getProperty("validUsername");
     }

@@ -5,12 +5,6 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 
-/**
- * Cucumber Hooks - Setup and teardown for test scenarios
- * 
- * @Before - Runs before each scenario (initializes driver)
- * @After - Runs after each scenario (quits driver)
- */
 public class Hooks {
 
     @Before
@@ -21,11 +15,7 @@ public class Hooks {
         
         try {
             DriverManager.initializeDriver();
-            
-            // Disable animations for faster test execution (emulator only)
             disableAnimations();
-            
-            // Wait for app to load
             Thread.sleep(3000);
         } catch (Exception e) {
             System.err.println("Failed to initialize driver: " + e.getMessage());
@@ -34,10 +24,6 @@ public class Hooks {
         }
     }
 
-    /**
-     * Disable Android animations for faster test execution
-     * Only works on emulators with proper permissions
-     */
     private void disableAnimations() {
         try {
             Runtime.getRuntime().exec("adb shell settings put global window_animation_scale 0");
@@ -45,7 +31,7 @@ public class Hooks {
             Runtime.getRuntime().exec("adb shell settings put global animator_duration_scale 0");
             System.out.println("Animations disabled for faster test execution");
         } catch (Exception e) {
-            System.out.println("Could not disable animations (this is OK on real devices): " + e.getMessage());
+            System.out.println("Could not disable animations: " + e.getMessage());
         }
     }
 
@@ -56,7 +42,6 @@ public class Hooks {
         } else {
             System.out.println("Scenario PASSED: " + scenario.getName());
         }
-        
         System.out.println("========================================");
         DriverManager.quitDriver();
     }

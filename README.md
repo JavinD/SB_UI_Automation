@@ -1,188 +1,301 @@
-# My Demo App - Android UI Automation (Barebones Starter)
+# SB UI Automation - Android App Testing Framework
 
-A minimal starter framework for Android UI automation using Java, Cucumber, and Appium. Build your own test features on this foundation!
+Mobile UI automation framework for testing the Sauce Labs Demo App on Android using Appium, Cucumber, and Java.
 
-## 🎯 What's Included
+## 📋 Table of Contents
+- [Prerequisites](#prerequisites)
+- [Project Setup](#project-setup)
+- [Running Tests](#running-tests)
+- [Project Structure](#project-structure)
+- [Configuration](#configuration)
+- [Test Tags](#test-tags)
 
-This is a **barebones template** with:
-- ✅ Complete project setup (Maven, dependencies, configuration)
-- ✅ Driver management for Appium
-- ✅ Base page object with common methods
-- ✅ Cucumber integration (hooks, runner)
-- ✅ Sample templates for pages, steps, and features
-- ❌ No pre-built test scenarios (you design them!)
+---
 
-## 🚀 Quick Start
+## 🛠️ Prerequisites
 
-### 1. Install Prerequisites
-```bash
-# Java JDK 11+
-java -version
+### Required Software
 
-# Maven
-mvn -version
+1. **Java JDK 11+**
+   - Download: https://www.oracle.com/java/technologies/javase-downloads.html
+   - Verify: `java -version`
 
-# Appium
-npm install -g appium@next
-appium driver install uiautomator2
+2. **Node.js 16+**
+   - Download: https://nodejs.org/
+   - Verify: `node --version`
+
+3. **Maven 3.6+**
+   - Download: https://maven.apache.org/download.cgi
+   - Verify: `mvn --version`
+
+4. **Appium 2.x**
+   ```powershell
+   npm install -g appium
+   appium --version
+   ```
+
+5. **Appium UiAutomator2 Driver**
+   ```powershell
+   appium driver install uiautomator2
+   appium driver list --installed
+   ```
+
+6. **Android SDK & Platform Tools**
+   - Download Android Studio: https://developer.android.com/studio
+   - Or install SDK command-line tools
+   - Add to PATH: `ANDROID_HOME` environment variable
+   - Verify: `adb --version`
+
+7. **Android Emulator or Physical Device**
+   - **Emulator**: Create via Android Studio AVD Manager
+   - **Physical Device**: Enable USB Debugging in Developer Options
+
+---
+
+## 🚀 Project Setup
+
+### 1. Clone or Extract Project
+```powershell
+cd D:\Javin\Job\SB\SB_UI_Automation\SB_UI_Automation
 ```
 
-### 2. Get the APK
-Download from: https://github.com/saucelabs/my-demo-app-android/releases  
-Place in: `src/test/resources/app/MyDemoApp.apk`
-
-### 3. Configure
-Edit `src/test/resources/config.properties`:
-```properties
-deviceName=YOUR_DEVICE_NAME  # From 'adb devices'
-platformVersion=12.0         # Your Android version
-```
-
-### 4. Install Dependencies
-```bash
+### 2. Install Dependencies
+```powershell
 mvn clean install -DskipTests
 ```
 
-### 5. Run
-```bash
-# Terminal 1: Start Appium
-appium
-
-# Terminal 2: Run tests
-mvn clean test
+### 3. Download APK
+Place the `MyDemoApp.apk` file in:
 ```
+src/test/resources/app/MyDemoApp.apk
+```
+
+Download from: https://github.com/saucelabs/my-demo-app-android/releases
+
+### 4. Start Android Emulator or Device
+**For Emulator:**
+```powershell
+emulator -avd YOUR_AVD_NAME
+```
+
+**For Physical Device:**
+- Connect via USB
+- Enable USB Debugging
+- Trust computer connection
+
+### 5. Verify Device Connection
+```powershell
+adb devices
+```
+Expected output:
+```
+List of devices attached
+emulator-5554    device
+```
+
+### 6. Configure Test Settings
+Edit `src/test/resources/config.properties`:
+
+```properties
+# Update with your device name from 'adb devices'
+deviceName=emulator-5554
+
+# Update with your Android version (check in Settings > About Phone)
+platformVersion=14.0
+
+# Valid test credentials
+validUsername=bob@example.com
+validPassword=10203040
+```
+
+### 7. Start Appium Server
+```powershell
+appium
+```
+Keep this terminal running. You should see:
+```
+[Appium] Welcome to Appium v2.x.x
+[Appium] Appium REST http interface listener started on http://127.0.0.1:4723
+```
+
+---
+
+## ▶️ Running Tests
+
+### Run All Tests
+```powershell
+mvn test
+```
+
+### Run Specific Test Tags
+```powershell
+# Smoke tests only
+mvn test '-Dcucumber.filter.tags=@smoke'
+
+# Login tests
+mvn test '-Dcucumber.filter.tags=@login'
+
+# Cart tests
+mvn test '-Dcucumber.filter.tags=@cart'
+
+# Complete E2E flow
+mvn test '-Dcucumber.filter.tags=@e2e'
+
+# Positive test cases only
+mvn test '-Dcucumber.filter.tags=@positive'
+
+# Negative test cases only
+mvn test '-Dcucumber.filter.tags=@negative'
+```
+
+### Combine Tags
+```powershell
+# Smoke AND checkout tests
+mvn test '-Dcucumber.filter.tags=@smoke and @checkout'
+
+# Login OR cart tests
+mvn test '-Dcucumber.filter.tags=@login or @cart'
+```
+
+### Skip Clean (Faster)
+```powershell
+mvn test '-Dcucumber.filter.tags=@smoke'
+```
+
+---
 
 ## 📁 Project Structure
 
 ```
-├── src/test/java/com/saucedemo/
-│   ├── config/
-│   │   └── ConfigReader.java         # Configuration management
-│   ├── driver/
-│   │   └── DriverManager.java        # Appium driver lifecycle
-│   ├── pages/
-│   │   ├── BasePage.java             # Common page methods
-│   │   └── SamplePage.java           # Template for your pages
-│   ├── steps/
-│   │   ├── Hooks.java                # Before/After scenario
-│   │   └── SampleSteps.java          # Template for step definitions
-│   └── runners/
-│       └── TestRunner.java           # Cucumber test runner
-├── src/test/resources/
-│   ├── features/
-│   │   └── Sample.feature            # Template feature file
-│   ├── app/
-│   │   └── MyDemoApp.apk             # Your APK
-│   └── config.properties             # Settings
-└── pom.xml                           # Maven dependencies
+SB_UI_Automation/
+├── src/test/
+│   ├── java/com/saucedemo/
+│   │   ├── config/
+│   │   │   └── ConfigReader.java          # Configuration file reader
+│   │   ├── driver/
+│   │   │   └── DriverManager.java         # Appium driver management
+│   │   ├── pages/
+│   │   │   ├── general/
+│   │   │   │   ├── BasePage.java          # Base page with common methods
+│   │   │   │   └── HeaderComponent.java   # Header component (menu, cart)
+│   │   │   ├── catalog/
+│   │   │   │   ├── CatalogPage.java       # Product catalog page
+│   │   │   │   └── SortModal.java         # Sorting modal
+│   │   │   ├── productdetail/
+│   │   │   │   └── ProductDetailPage.java # Product detail page
+│   │   │   ├── cart/
+│   │   │   │   └── CartPage.java          # Shopping cart page
+│   │   │   ├── login/
+│   │   │   │   └── LoginPage.java         # Login page
+│   │   │   └── checkout/
+│   │   │       ├── ShippingInfoPage.java  # Shipping information
+│   │   │       ├── PaymentInfoPage.java   # Payment information
+│   │   │       ├── CheckoutInfoPage.java  # Order review
+│   │   │       └── CheckoutCompletePage.java # Order confirmation
+│   │   ├── steps/                          # Step definitions (mirrors pages/)
+│   │   └── runner/
+│   │       └── TestRunner.java             # Cucumber test runner
+│   └── resources/
+│       ├── app/
+│       │   └── MyDemoApp.apk               # Android app to test
+│       ├── features/                        # Cucumber feature files (mirrors pages/)
+│       └── config.properties                # Test configuration
+├── pom.xml                                  # Maven dependencies
+└── README.md
 ```
-
-## 🔨 Building Your Tests
-
-### Step 1: Find Element Locators
-Use Appium Inspector to identify elements:
-```bash
-npm install -g appium-inspector
-```
-
-### Step 2: Create Page Object
-Create `src/test/java/com/saucedemo/pages/YourPage.java`:
-```java
-public class LoginPage extends BasePage {
-    @AndroidFindBy(accessibility = "username")
-    private WebElement usernameField;
-    
-    public void enterUsername(String username) {
-        sendKeys(usernameField, username);
-    }
-}
-```
-
-### Step 3: Write Feature File
-Create `src/test/resources/features/YourFeature.feature`:
-```gherkin
-Feature: Login
-  @login
-  Scenario: User logs in
-    Given the app is launched
-    When I enter credentials
-    Then I should see home page
-```
-
-### Step 4: Implement Steps
-Create `src/test/java/com/saucedemo/steps/YourSteps.java`:
-```java
-public class LoginSteps {
-    @When("I enter credentials")
-    public void iEnterCredentials() {
-        // Your implementation
-    }
-}
-```
-
-### Step 5: Run Your Tests
-```bash
-mvn clean test
-```
-
-## 📚 Documentation
-
-- **[QUICK_START.md](QUICK_START.md)** - Quick reference guide
-- **[SETUP_GUIDE.md](SETUP_GUIDE.md)** - Complete setup instructions
-
-## 💡 Common Locator Strategies
-
-```java
-// Accessibility ID
-@AndroidFindBy(accessibility = "button-name")
-
-// Resource ID
-@AndroidFindBy(id = "com.app:id/element_id")
-
-// UiAutomator
-@AndroidFindBy(uiAutomator = "new UiSelector().text(\"Login\")")
-
-// XPath
-@AndroidFindBy(xpath = "//android.widget.Button[@text='Click']")
-```
-
-## 🛠️ Useful Commands
-
-```bash
-# Check devices
-adb devices
-
-# Get current activity
-adb shell dumpsys window windows | grep -E 'mCurrentFocus'
-
-# Install APK
-adb install -r path/to/app.apk
-
-# Run specific tag
-mvn test -Dcucumber.filter.tags="@smoke"
-```
-
-## 📊 Test Reports
-
-After execution, view reports:
-- **HTML Report**: `target/cucumber-reports/cucumber.html`
-- **Screenshots**: `target/screenshots/` (on failure)
-
-## 🎓 Resources
-
-- [Appium Docs](https://appium.io/docs/en/latest/)
-- [Cucumber Docs](https://cucumber.io/docs/cucumber/)
-- [My Demo App](https://github.com/saucelabs/my-demo-app-android)
-
-## 🏗️ Design Your Features
-
-This is a **starter template**. You need to:
-1. 📱 Use Appium Inspector to find element locators
-2. 📄 Create page objects for app screens
-3. 📝 Write feature files with your scenarios
-4. 🔧 Implement step definitions
-5. ▶️ Run and iterate!
 
 ---
 
-**Start building!** Check out the sample files and templates to get started. 🚀
+## ⚙️ Configuration
+
+### config.properties
+Located at: `src/test/resources/config.properties`
+
+```properties
+# Appium Server
+appiumServerUrl=http://127.0.0.1:4723
+
+# Android Device
+platformName=Android
+deviceName=emulator-5554
+platformVersion=14.0
+automationName=UiAutomator2
+
+# Application
+appPackage=com.saucelabs.mydemoapp.android
+appActivity=com.saucelabs.mydemoapp.android.view.activities.SplashActivity
+appPath=src/test/resources/app/MyDemoApp.apk
+
+# App Launch Settings
+appWaitActivity=*
+appWaitDuration=30
+
+# Wait Times (seconds)
+implicitWait=10
+explicitWait=20
+
+# Test Credentials
+validUsername=bob@example.com
+validPassword=10203040
+```
+
+### Using Config in Tests
+```java
+// In feature files, use "from_config" or "config" placeholder
+When I enter username "from_config"
+And I enter password "from_config"
+
+// Credentials will be automatically loaded from config.properties
+```
+
+---
+
+## 🏷️ Test Tags
+
+| Tag | Description | Example |
+|-----|-------------|---------|
+| `@smoke` | Critical path tests | `mvn test '-Dcucumber.filter.tags=@smoke'` |
+| `@e2e` | End-to-end complete flows | `mvn test '-Dcucumber.filter.tags=@e2e'` |
+| `@launch` | App launch tests | `mvn test '-Dcucumber.filter.tags=@launch'` |
+| `@catalog` | Product catalog tests | `mvn test '-Dcucumber.filter.tags=@catalog'` |
+| `@productdetail` | Product detail tests | `mvn test '-Dcucumber.filter.tags=@productdetail'` |
+| `@cart` | Shopping cart tests | `mvn test '-Dcucumber.filter.tags=@cart'` |
+| `@login` | Login functionality tests | `mvn test '-Dcucumber.filter.tags=@login'` |
+| `@checkout` | Checkout process tests | `mvn test '-Dcucumber.filter.tags=@checkout'` |
+| `@shippinginfo` | Shipping info tests | `mvn test '-Dcucumber.filter.tags=@shippinginfo'` |
+| `@paymentinfo` | Payment info tests | `mvn test '-Dcucumber.filter.tags=@paymentinfo'` |
+| `@sort` | Product sorting tests | `mvn test '-Dcucumber.filter.tags=@sort'` |
+| `@positive` | Positive test scenarios | `mvn test '-Dcucumber.filter.tags=@positive'` |
+| `@negative` | Negative test scenarios | `mvn test '-Dcucumber.filter.tags=@negative'` |
+
+---
+
+## 📊 Test Reports
+
+After test execution, reports are generated in:
+```
+target/cucumber-reports/cucumber-html-report.html
+```
+
+Open in browser to view detailed test results with screenshots and logs.
+
+---
+
+## 🎯 Quick Start Checklist
+
+- [ ] Install Java JDK 11+
+- [ ] Install Node.js & Appium
+- [ ] Install Appium UiAutomator2 driver
+- [ ] Install Android SDK & ADB
+- [ ] Start Android emulator or connect device
+- [ ] Verify device with `adb devices`
+- [ ] Place APK at `src/test/resources/app/MyDemoApp.apk`
+- [ ] Update `config.properties` with device name and platform version
+- [ ] Start Appium server: `appium`
+- [ ] Run tests: `mvn test '-Dcucumber.filter.tags=@smoke'`
+
+---
+
+## 📄 License
+
+This project is for educational and testing purposes.
