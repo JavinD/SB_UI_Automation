@@ -15,8 +15,7 @@ public class ConfigReader {
             properties.load(fis);
             fis.close();
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to load configuration file at: " + CONFIG_FILE_PATH);
+            throw new RuntimeException("Failed to load configuration file at: " + CONFIG_FILE_PATH, e);
         }
     }
 
@@ -68,4 +67,3 @@ public class ConfigReader {
         return properties.getProperty("validPassword");
     }
 }
-

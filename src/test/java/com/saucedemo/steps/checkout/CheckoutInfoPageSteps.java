@@ -6,10 +6,6 @@ import io.cucumber.java.en.When;
 
 import org.junit.Assert;
 
-/**
- * Step definitions for Checkout Info Page functionality
- * Tests checkout info page display after payment info
- */
 public class CheckoutInfoPageSteps {
 
     private CheckoutInfoPage checkoutInfoPage;
@@ -20,7 +16,6 @@ public class CheckoutInfoPageSteps {
             checkoutInfoPage = new CheckoutInfoPage();
         }
 
-        // Wait a moment for page to load
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -29,7 +24,6 @@ public class CheckoutInfoPageSteps {
 
         boolean isDisplayed = checkoutInfoPage.isCheckoutInfoPageDisplayed();
         Assert.assertTrue("Checkout info page is not displayed after payment info", isDisplayed);
-        System.out.println("Successfully navigated to checkout info page");
     }
 
     @Then("the checkout info page should be displayed")
@@ -54,7 +48,6 @@ public class CheckoutInfoPageSteps {
 
         boolean isVisible = checkoutInfoPage.isPlaceOrderButtonVisible();
         Assert.assertTrue("Place order button is not visible", isVisible);
-        System.out.println("Place order button is visible");
     }
 
     @Then("the place order button should be clickable")
@@ -65,7 +58,5 @@ public class CheckoutInfoPageSteps {
 
         boolean isClickable = checkoutInfoPage.isPlaceOrderButtonClickable();
         Assert.assertTrue("Place order button is not clickable", isClickable);
-        System.out.println("Place order button is clickable");
     }
 }
-

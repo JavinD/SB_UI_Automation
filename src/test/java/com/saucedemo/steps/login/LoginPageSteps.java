@@ -7,10 +7,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
-/**
- * Step definitions for Login Page functionality
- * Tests login scenarios with valid and invalid credentials
- */
 public class LoginPageSteps {
 
     private LoginPage loginPage;
@@ -20,7 +16,6 @@ public class LoginPageSteps {
         loginPage = new LoginPage();
         boolean isDisplayed = loginPage.isLoginPageDisplayed();
         Assert.assertTrue("Login page is not displayed", isDisplayed);
-        System.out.println("User is on login page");
     }
 
     @Then("I should be on the login page")
@@ -36,7 +31,6 @@ public class LoginPageSteps {
 
         boolean allVisible = loginPage.areAllLoginElementsVisible();
         Assert.assertTrue("Not all login page elements are visible", allVisible);
-        System.out.println("All login page elements are visible");
     }
 
     @When("I enter username {string}")
@@ -45,7 +39,6 @@ public class LoginPageSteps {
             loginPage = new LoginPage();
         }
 
-        // Check if username is a config reference
         if (username.equals("from_config") || username.equals("config")) {
             username = ConfigReader.getValidUsername();
         }
@@ -59,7 +52,6 @@ public class LoginPageSteps {
             loginPage = new LoginPage();
         }
 
-        // Check if password is a config reference
         if (password.equals("from_config") || password.equals("config")) {
             password = ConfigReader.getValidPassword();
         }
@@ -82,7 +74,6 @@ public class LoginPageSteps {
             loginPage = new LoginPage();
         }
 
-        // Check if username/password are config references
         if (username.equals("from_config") || username.equals("config")) {
             username = ConfigReader.getValidUsername();
         }
@@ -99,7 +90,6 @@ public class LoginPageSteps {
             loginPage = new LoginPage();
         }
 
-        // Clear username field if it has any value
         loginPage.clearUsername();
     }
 
@@ -109,7 +99,6 @@ public class LoginPageSteps {
             loginPage = new LoginPage();
         }
 
-        // Clear password field if it has any value
         loginPage.clearPassword();
     }
 
@@ -121,7 +110,6 @@ public class LoginPageSteps {
 
         boolean isEmpty = loginPage.isUsernameEmpty();
         Assert.assertTrue("Username field is not empty", isEmpty);
-        System.out.println("Username field is empty");
     }
 
     @Then("the password field should be empty")
@@ -132,7 +120,6 @@ public class LoginPageSteps {
 
         boolean isEmpty = loginPage.isPasswordEmpty();
         Assert.assertTrue("Password field is not empty", isEmpty);
-        System.out.println("Password field is empty");
     }
 
     @Then("the login button should be visible")
@@ -143,7 +130,6 @@ public class LoginPageSteps {
 
         boolean isVisible = loginPage.isLoginButtonVisible();
         Assert.assertTrue("Login button is not visible", isVisible);
-        System.out.println("Login button is visible");
     }
 
     @Then("the login button should be clickable")
@@ -154,7 +140,6 @@ public class LoginPageSteps {
 
         boolean isClickable = loginPage.isLoginButtonClickable();
         Assert.assertTrue("Login button is not clickable", isClickable);
-        System.out.println("Login button is clickable");
     }
 
     @Then("I should remain on the login page")
@@ -163,7 +148,6 @@ public class LoginPageSteps {
             loginPage = new LoginPage();
         }
 
-        // Wait a moment to ensure no navigation happened
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -172,7 +156,6 @@ public class LoginPageSteps {
 
         boolean isStillOnLoginPage = loginPage.isLoginPageDisplayed();
         Assert.assertTrue("User was redirected away from login page", isStillOnLoginPage);
-        System.out.println("User remained on login page (validation failed as expected)");
     }
 
     @When("I clear all login fields")
@@ -184,4 +167,3 @@ public class LoginPageSteps {
         loginPage.clearAllFields();
     }
 }
-

@@ -10,10 +10,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
-/**
- * Base Page Object - All page objects should extend this class
- * Provides common methods for element interaction and waits
- */
 public class BasePage {
     protected AndroidDriver driver;
     protected WebDriverWait wait;
@@ -73,4 +69,3 @@ public class BasePage {
         }
     }
 }
-

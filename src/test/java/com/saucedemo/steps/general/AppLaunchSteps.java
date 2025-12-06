@@ -11,7 +11,6 @@ public class AppLaunchSteps {
 
     @Given("the app is launched")
     public void theAppIsLaunched() {
-        System.out.println("App launched successfully");
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -24,6 +23,5 @@ public class AppLaunchSteps {
         catalogPage = new CatalogPage();
         boolean isDisplayed = catalogPage.isCatalogPageDisplayed();
         Assert.assertTrue("Catalog page is not displayed!", isDisplayed);
-        System.out.println("Catalog page is displayed");
     }
 }

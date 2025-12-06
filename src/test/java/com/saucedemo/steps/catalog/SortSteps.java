@@ -11,10 +11,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Step definitions for Sort functionality on Catalog Page
- * Tests sorting by name and price in ascending/descending order
- */
 public class SortSteps {
 
     private CatalogPage catalogPage;
@@ -26,9 +22,7 @@ public class SortSteps {
             catalogPage = new CatalogPage();
         }
         catalogPage.clickSortButton();
-        System.out.println("Clicked on sort button");
         
-        // Wait for modal to appear
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
@@ -41,7 +35,6 @@ public class SortSteps {
         sortModal = new SortModal();
         boolean isDisplayed = sortModal.isSortModalDisplayed();
         Assert.assertTrue("Sort modal is not displayed", isDisplayed);
-        System.out.println("Sort modal is displayed");
     }
 
     @Then("all sort options should be visible")
@@ -51,7 +44,6 @@ public class SortSteps {
         }
         boolean allVisible = sortModal.areAllSortOptionsVisible();
         Assert.assertTrue("Not all sort options are visible", allVisible);
-        System.out.println("All sort options are visible");
     }
 
     @When("I select sort by name ascending")
@@ -96,11 +88,7 @@ public class SortSteps {
         List<String> expectedTitles = new ArrayList<>(actualTitles);
         Collections.sort(expectedTitles, String.CASE_INSENSITIVE_ORDER);
         
-        System.out.println("Actual order: " + actualTitles);
-        System.out.println("Expected order: " + expectedTitles);
-        
         Assert.assertEquals("Products are not sorted by name ascending", expectedTitles, actualTitles);
-        System.out.println("Products are correctly sorted by name in ascending order");
     }
 
     @Then("products should be sorted by name in descending order")
@@ -114,11 +102,7 @@ public class SortSteps {
         Collections.sort(expectedTitles, String.CASE_INSENSITIVE_ORDER);
         Collections.reverse(expectedTitles);
         
-        System.out.println("Actual order: " + actualTitles);
-        System.out.println("Expected order: " + expectedTitles);
-        
         Assert.assertEquals("Products are not sorted by name descending", expectedTitles, actualTitles);
-        System.out.println("Products are correctly sorted by name in descending order");
     }
 
     @Then("products should be sorted by price in ascending order")
@@ -130,7 +114,6 @@ public class SortSteps {
         List<String> actualPrices = catalogPage.getAllProductPrices();
         List<Double> actualPriceValues = new ArrayList<>();
         
-        // Convert prices to double for comparison
         for (String price : actualPrices) {
             actualPriceValues.add(catalogPage.parsePriceToDouble(price));
         }
@@ -138,11 +121,7 @@ public class SortSteps {
         List<Double> expectedPriceValues = new ArrayList<>(actualPriceValues);
         Collections.sort(expectedPriceValues);
         
-        System.out.println("Actual prices: " + actualPriceValues);
-        System.out.println("Expected prices: " + expectedPriceValues);
-        
         Assert.assertEquals("Products are not sorted by price ascending", expectedPriceValues, actualPriceValues);
-        System.out.println("Products are correctly sorted by price in ascending order");
     }
 
     @Then("products should be sorted by price in descending order")
@@ -154,7 +133,6 @@ public class SortSteps {
         List<String> actualPrices = catalogPage.getAllProductPrices();
         List<Double> actualPriceValues = new ArrayList<>();
         
-        // Convert prices to double for comparison
         for (String price : actualPrices) {
             actualPriceValues.add(catalogPage.parsePriceToDouble(price));
         }
@@ -163,11 +141,6 @@ public class SortSteps {
         Collections.sort(expectedPriceValues);
         Collections.reverse(expectedPriceValues);
         
-        System.out.println("Actual prices: " + actualPriceValues);
-        System.out.println("Expected prices: " + expectedPriceValues);
-        
         Assert.assertEquals("Products are not sorted by price descending", expectedPriceValues, actualPriceValues);
-        System.out.println("Products are correctly sorted by price in descending order");
     }
 }
-

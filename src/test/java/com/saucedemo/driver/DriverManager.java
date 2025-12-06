@@ -45,11 +45,9 @@ public class DriverManager {
                     .implicitlyWait(Duration.ofSeconds(ConfigReader.getImplicitWait()));
 
             driver.set(androidDriver);
-            System.out.println("Driver initialized successfully!");
 
         } catch (MalformedURLException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to initialize driver: Invalid Appium Server URL");
+            throw new RuntimeException("Failed to initialize driver: Invalid Appium Server URL", e);
         }
     }
 
@@ -61,8 +59,6 @@ public class DriverManager {
         if (driver.get() != null) {
             driver.get().quit();
             driver.remove();
-            System.out.println("Driver quit successfully!");
         }
     }
 }
-

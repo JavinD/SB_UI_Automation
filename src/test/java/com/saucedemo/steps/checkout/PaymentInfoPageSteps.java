@@ -6,10 +6,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
-/**
- * Step definitions for Payment Info Page functionality
- * Tests payment info page display and form submission
- */
 public class PaymentInfoPageSteps {
 
     private PaymentInfoPage paymentInfoPage;
@@ -19,7 +15,6 @@ public class PaymentInfoPageSteps {
         paymentInfoPage = new PaymentInfoPage();
         boolean isDisplayed = paymentInfoPage.isPaymentInfoPageDisplayed();
         Assert.assertTrue("Payment info page is not displayed", isDisplayed);
-        System.out.println("User is on payment info page");
     }
 
     @Then("I should be on the payment info page")
@@ -28,7 +23,6 @@ public class PaymentInfoPageSteps {
             paymentInfoPage = new PaymentInfoPage();
         }
 
-        // Wait a moment for page to load
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -37,7 +31,6 @@ public class PaymentInfoPageSteps {
 
         boolean isDisplayed = paymentInfoPage.isPaymentInfoPageDisplayed();
         Assert.assertTrue("Payment info page is not displayed after shipping info", isDisplayed);
-        System.out.println("Successfully navigated to payment info page");
     }
 
     @When("I enter cardholder name {string}")
@@ -102,7 +95,6 @@ public class PaymentInfoPageSteps {
 
         boolean allVisible = paymentInfoPage.areAllPaymentInfoFormElementsVisible();
         Assert.assertTrue("Not all payment info form elements are visible", allVisible);
-        System.out.println("All payment info form elements are visible");
     }
 
     @Then("the review order button should be visible")
@@ -113,7 +105,5 @@ public class PaymentInfoPageSteps {
 
         boolean isVisible = paymentInfoPage.isReviewOrderButtonVisible();
         Assert.assertTrue("Review order button is not visible", isVisible);
-        System.out.println("Review order button is visible");
     }
 }
-

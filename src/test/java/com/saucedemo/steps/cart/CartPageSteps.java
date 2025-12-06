@@ -7,10 +7,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
-/**
- * Step definitions for Cart Page functionality
- * Tests empty cart, cart items, quantity changes, and checkout
- */
 public class CartPageSteps {
 
     private CartPage cartPage;
@@ -23,20 +19,17 @@ public class CartPageSteps {
         cartPage = new CartPage();
         boolean isDisplayed = cartPage.isCartPageDisplayed();
         Assert.assertTrue("Cart page is not displayed", isDisplayed);
-        System.out.println("User is on cart page");
     }
 
     @When("I navigate to cart page")
     public void iNavigateToCartPage() {
-        // Use HeaderComponent method to click cart
         if (cartPage == null) {
             cartPage = new CartPage();
         }
         cartPage.clickCart();
-        System.out.println("Navigated to cart page");
         
         try {
-            Thread.sleep(2000); // Wait for cart page to load
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -50,7 +43,6 @@ public class CartPageSteps {
 
         boolean isEmpty = cartPage.isCartEmpty();
         Assert.assertTrue("Cart should be empty but it's not", isEmpty);
-        System.out.println("Cart is empty");
     }
 
     @Then("I should see the empty cart message")
@@ -64,7 +56,6 @@ public class CartPageSteps {
         
         Assert.assertTrue("Empty cart message is not displayed", isEmpty);
         Assert.assertFalse("Empty cart message text is empty", message.isEmpty());
-        System.out.println("Empty cart message: " + message);
     }
 
     @Then("the cart should have items")
@@ -75,7 +66,6 @@ public class CartPageSteps {
 
         boolean hasItems = cartPage.hasItemsInCart();
         Assert.assertTrue("Cart should have items but it's empty", hasItems);
-        System.out.println("Cart has items");
     }
 
     @Then("the cart should NOT be empty")
@@ -91,7 +81,6 @@ public class CartPageSteps {
 
         int actualCount = cartPage.getCartItemCount();
         Assert.assertEquals("Cart item count does not match", expectedCount, actualCount);
-        System.out.println("Cart has " + actualCount + " item(s)");
     }
 
     @Then("I should see at least {int} item in the cart")
@@ -103,7 +92,6 @@ public class CartPageSteps {
         int actualCount = cartPage.getCartItemCount();
         Assert.assertTrue("Expected at least " + minCount + " items, but found " + actualCount,
                          actualCount >= minCount);
-        System.out.println("Cart has " + actualCount + " item(s)");
     }
 
     @When("I click the plus button for the first item in cart")
@@ -152,7 +140,6 @@ public class CartPageSteps {
 
         int actualQuantity = cartPage.getItemQuantity(0);
         Assert.assertEquals("Item quantity does not match", expectedQuantity, actualQuantity);
-        System.out.println("First item quantity is: " + actualQuantity);
     }
 
     @Then("the cart item quantity should increase to {int}")
@@ -187,11 +174,8 @@ public class CartPageSteps {
         }
 
         int currentItemCount = cartPage.getCartItemCount();
-        
-        // Either cart is now empty or item count decreased
         boolean itemRemoved = (currentItemCount < initialItemCount) || cartPage.isCartEmpty();
         Assert.assertTrue("Item was not removed from cart", itemRemoved);
-        System.out.println("Item successfully removed from cart");
     }
 
     @When("I decrease the quantity to {int}")
@@ -221,7 +205,6 @@ public class CartPageSteps {
 
         boolean allVisible = cartPage.areCartItemControlsVisible(0);
         Assert.assertTrue("Not all cart item controls are visible", allVisible);
-        System.out.println("All cart item controls are visible");
     }
 
     @Then("the checkout button should be visible")
@@ -232,7 +215,6 @@ public class CartPageSteps {
 
         boolean isVisible = cartPage.isCheckoutButtonVisible();
         Assert.assertTrue("Checkout button is not visible", isVisible);
-        System.out.println("Checkout button is visible");
     }
 
     @Then("the checkout button should NOT be visible")
@@ -243,7 +225,6 @@ public class CartPageSteps {
 
         boolean isVisible = cartPage.isCheckoutButtonVisible();
         Assert.assertFalse("Checkout button should not be visible when cart is empty", isVisible);
-        System.out.println("Checkout button is NOT visible (cart is empty)");
     }
 
     @Then("the checkout button should be clickable")
@@ -254,7 +235,6 @@ public class CartPageSteps {
 
         boolean isClickable = cartPage.isCheckoutButtonClickable();
         Assert.assertTrue("Checkout button is not clickable", isClickable);
-        System.out.println("Checkout button is clickable");
     }
 
     @When("I click the checkout button")
@@ -273,12 +253,8 @@ public class CartPageSteps {
 
     @Then("I should be redirected to the login page")
     public void iShouldBeRedirectedToTheLoginPage() {
-        // This would be verified by checking login page elements
-        // For now, just log that navigation should have happened
-        System.out.println("Should be on login page now");
-        
         try {
-            Thread.sleep(2000); // Wait for login page to load
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -301,7 +277,5 @@ public class CartPageSteps {
 
         int actualTotal = cartPage.getTotalQuantity();
         Assert.assertEquals("Total cart quantity does not match", expectedTotal, actualTotal);
-        System.out.println("Total quantity in cart: " + actualTotal);
     }
 }
-

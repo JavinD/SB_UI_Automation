@@ -6,10 +6,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 
-/**
- * Step definitions for Shipping Info Page functionality
- * Tests shipping info page display and form elements
- */
 public class ShippingInfoPageSteps {
 
     private ShippingInfoPage shippingInfoPage;
@@ -19,7 +15,6 @@ public class ShippingInfoPageSteps {
         shippingInfoPage = new ShippingInfoPage();
         boolean isDisplayed = shippingInfoPage.isShippingInfoPageDisplayed();
         Assert.assertTrue("Shipping info page is not displayed", isDisplayed);
-        System.out.println("User is on shipping info page");
     }
 
     @Then("I should be on the shipping info page")
@@ -28,7 +23,6 @@ public class ShippingInfoPageSteps {
             shippingInfoPage = new ShippingInfoPage();
         }
 
-        // Wait a moment for page to load
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -37,7 +31,6 @@ public class ShippingInfoPageSteps {
 
         boolean isDisplayed = shippingInfoPage.isShippingInfoPageDisplayed();
         Assert.assertTrue("Shipping info page is not displayed after login", isDisplayed);
-        System.out.println("Successfully navigated to shipping info page");
     }
 
     @Then("the shipping info page should be displayed")
@@ -53,7 +46,6 @@ public class ShippingInfoPageSteps {
 
         boolean isVisible = shippingInfoPage.isShippingInfoTitleVisible();
         Assert.assertTrue("Shipping info title is not visible", isVisible);
-        System.out.println("Shipping info title is visible");
     }
 
     @Then("I should see the shipping info title")
@@ -69,7 +61,6 @@ public class ShippingInfoPageSteps {
 
         boolean allVisible = shippingInfoPage.areAllShippingInfoFormElementsVisible();
         Assert.assertTrue("Not all shipping info form elements are visible", allVisible);
-        System.out.println("All shipping info form elements are visible");
     }
 
     @When("I enter full name {string}")
@@ -152,7 +143,6 @@ public class ShippingInfoPageSteps {
 
         boolean isVisible = shippingInfoPage.isPaymentButtonVisible();
         Assert.assertTrue("Payment button is not visible", isVisible);
-        System.out.println("Payment button is visible");
     }
 
     @Then("the payment button should be clickable")
@@ -163,7 +153,6 @@ public class ShippingInfoPageSteps {
 
         boolean isClickable = shippingInfoPage.isPaymentButtonClickable();
         Assert.assertTrue("Payment button is not clickable", isClickable);
-        System.out.println("Payment button is clickable");
     }
 
     @Then("the shipping info title should display {string}")
@@ -174,7 +163,5 @@ public class ShippingInfoPageSteps {
 
         String actualTitle = shippingInfoPage.getShippingInfoTitle();
         Assert.assertEquals("Shipping info title does not match", expectedTitle, actualTitle);
-        System.out.println("Shipping info title is: " + actualTitle);
     }
 }
-

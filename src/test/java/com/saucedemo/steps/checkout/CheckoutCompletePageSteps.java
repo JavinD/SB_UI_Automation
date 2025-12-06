@@ -4,10 +4,6 @@ import com.saucedemo.pages.checkout.CheckoutCompletePage;
 import io.cucumber.java.en.Then;
 import org.junit.Assert;
 
-/**
- * Step definitions for Checkout Complete Page functionality
- * Tests order completion confirmation display
- */
 public class CheckoutCompletePageSteps {
 
     private CheckoutCompletePage checkoutCompletePage;
@@ -18,7 +14,6 @@ public class CheckoutCompletePageSteps {
             checkoutCompletePage = new CheckoutCompletePage();
         }
 
-        // Wait a moment for page to load
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -27,7 +22,6 @@ public class CheckoutCompletePageSteps {
 
         boolean isDisplayed = checkoutCompletePage.isCheckoutCompletePageDisplayed();
         Assert.assertTrue("Checkout complete page is not displayed after placing order", isDisplayed);
-        System.out.println("Successfully navigated to checkout complete page - Order placed!");
     }
 
     @Then("the checkout complete page should be displayed")
@@ -43,7 +37,5 @@ public class CheckoutCompletePageSteps {
 
         boolean isVisible = checkoutCompletePage.isOrderConfirmationVisible();
         Assert.assertTrue("Order confirmation is not visible", isVisible);
-        System.out.println("Order confirmation is visible");
     }
 }
-
